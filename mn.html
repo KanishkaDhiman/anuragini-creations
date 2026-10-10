@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anuragini Creations — Invitation Maker</title>
+
+  <!-- Google font (optional, small) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --pink:#e75480;
+      --bg:#fffafc;
+      --card:#fff;
+      --muted:#6b6b6b;
+      --accent:#52c397;
+      --shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+    *{box-sizing:border-box}
+    body{font-family:"Poppins",system-ui,Arial; margin:0; background:var(--bg); color:#222;}
+    header{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--pink)}
+    .logo .dot{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#7ad4c5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:#333;text-decoration:none;padding:8px 10px;border-radius:6px;font-weight:500}
+    nav a:hover{background:#f6f6f6}
+    .hero{padding:48px 28px;text-align:center}
+    .hero h1{font-size:48px;margin:6px 0;color:#2b2b2b}
+    .hero p{color:var(--muted);font-size:18px;margin:0 0 18px}
+    .categories{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;padding:18px 28px}
+    .card{width:160px;border-radius:14px;padding:14px;background:linear-gradient(180deg,#fff,#fff);box-shadow:var(--shadow);text-align:center;border:1px solid #f0e7f0;cursor:pointer}
+    .thumb{height:120px;border-radius:10px;background:linear-gradient(135deg,#fbeaf0,#fff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--pink);margin-bottom:10px}
+    .card small{display:block;color:var(--muted)}
+    .grid{max-width:1100px;margin:24px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    /* Gallery */
+    .gallery-item{background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--shadow);text-align:center}
+    .gallery-item .img{height:180px;border-radius:8px;background:linear-gradient(135deg,#fff0f6,#f8f8ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--pink);margin-bottom:10px;overflow:hidden}
+    .btn{background:var(--pink);color:#fff;padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:600}
+    .btn.secondary{background:#fff;color:var(--pink);border:1px solid var(--pink)}
+    /* AI & Steps style */
+    .panel {
+  max-width: 900px;
+  margin: 28px auto;
+  background: linear-gradient(135deg,#ffffff,#ffe4ec);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(231,84,128,0.2);
+}    .steps{display:flex;gap:10px;flex-wrap:wrap}
+    .step-box{flex:1;min-width:160px;padding:12px;border-radius:10px;border:1px dashed #eee;background:#fafafa;text-align:center}
+    .result{margin-top:14px;padding:12px;border-radius:8px;background:#fcfcff;border-left:5px solid var(--pink)}
+    /* Order form */
+    form .row{display:flex;gap:10px;flex-wrap:wrap}
+    input[type="text"],input[type="email"],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e6e6}
+    textarea{min-height:90px}
+    .footer{background:#fff;padding:20px;text-align:center;margin-top:30px;border-top:1px solid #f0f0f0}
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
+    .modal.show{display:flex}
+    .modal .box{width:100%;max-width:760px;background:#fff;padding:16px;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+    .close{float:right;background:#eee;border:none;border-radius:8px;padding:6px;cursor:pointer}
+    .small{font-size:13px;color:var(--muted)}
+    /* responsive */
+    @media (max-width:720px){
+      .hero h1{font-size:32px}
+      .card{width:46%}
+    }
+    #video input, #video select, #video textarea{
+  margin-top:8px;
+  margin-bottom:15px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  transition:0.3s;
+}
+
+#video input:focus, #video select:focus{
+  border-color:#e75480;
+  box-shadow:0 0 8px rgba(231,84,128,0.3);
+}
+  </style>
+</head>
+<body>
+    <!-- AUTH PAGE -->
+<div id="authPage" style="display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#fbc2eb,#a6c1ee);">
+  <div style="background:white;padding:30px;border-radius:15px;width:300px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+
+    <h2 id="title">Login</h2>
+
+    <input type="text" id="username" placeholder="Username" style="width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ddd;">
+    <input type="password" id="password" placeholder="Password" style="width:100%;padding:10px;margin:10px 0;border-radius:8px;border:1px solid #ddd;">
+
+    <button onclick="handleAuth()" style="width:100%;padding:10px;background:#e75480;color:white;border:none;border-radius:8px;">Login</button>
+
+    <p onclick="toggleForm()" style="color:#e75480;cursor:pointer;margin-top:10px;">Create new account</p>
+    <p id="msg" style="color:red"></p>
+
+  </div>
+</div>
+<div id="mainSite" style="display:none;"></div>
+<div id="dashboard" style="text-align:center;padding:40px;">
+
+  <h1>Welcome to Anuragini Creations 🎨</h1>
+  <p>Select what you want to create</p>
+
+  <div style="display:flex;gap:20px;justify-content:center;margin-top:30px;flex-wrap:wrap;">
+
+    <div class="card" onclick="openSection('home')">
+      🖼️<br><b>Invitation Maker</b>
+    </div>
+
+    <div class="card" onclick="openSection('video')">
+      🎬<br><b>Video Maker</b>
+    </div>
+
+    <div class="card" onclick="openSection('saved')">
+      💾<br><b>My Creations</b>
+    </div>
+
+  </div>
+
+</div>
+<div id="siteContent" style="display:none;">
+  <header>
+    <div class="logo">
+      <div class="dot">AC</div>
+      <div>
+        <div>Anuragini</div>
+        <div style="font-size:12px;margin-top:-4px;color:var(--muted)">Design Studio</div>
+      </div>
+    </div>
+
+    <nav>
+      <button class="btn" onclick="logout()">Logout</button>
+      <a href="#video">Video Maker</a>
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#ai">Design AI</a>
+      <a href="#order">Order</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="goDashboard()">Dashboard</a>
+      <button class="btn" type="button" onclick="openModal('orderModal')">Order Now</button>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <h1>Invitation maker</h1>
+    <p>Explore a wide range of categories to find the perfect invitation or design for your event</p>
+
+    <div class="categories" aria-hidden="true">
+      <div class="card" onclick="openGallery('Birthday')">
+        <div class="thumb">Birthday</div>
+        <small>Birthday</small>
+      </div>
+      <div class="card" onclick="openGallery('Wedding')">
+        <div class="thumb">Wedding</div>
+        <small>Wedding</small>
+      </div>
+      <div class="card" onclick="openGallery('Baby')">
+        <div class="thumb" style="background:linear-gradient(135deg,#b9f6d6,#fff)">Baby shower</div>
+        <small>Baby & Kids</small>
+      </div>
+      <div class="card" onclick="openUpload()">
+        <div class="thumb" style="background:linear-gradient(135deg,#f2f6ff,#fff)">Upload</div>
+        <small>Upload your design</small>
+      </div>
+      <div class="card" onclick="openGallery('Christmas')">
+        <div class="thumb" style="background:linear-gradient(135deg,#f0fff4,#fff)">Christmas</div>
+        <small>Christmas</small>
+      </div>
+      <div class="card" onclick="scrollToId('ai')">
+        <div class="thumb" style="background:linear-gradient(135deg,#fff6f2,#fff)">AI Magic</div>
+        <small>AI Magic photo</small>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Services / quick -->
+  <section id="services" class="grid" aria-labelledby="servicesTitle">
+    <div style="grid-column:1 / -1;text-align:center">
+      <h2 id="servicesTitle">Our Services</h2>
+      <p class="small">Formal & Informal invitations, logos, posters, custom quotes & more</p>
+    </div>
+
+    <div class="gallery-item">
+      <div class="img">Formal Invites</div>
+      <h4>Formal Invitations</h4>
+      <p class="small">Corporate, official & wedding formal designs</p>
+      <button class="btn secondary" type="button" onclick="scrollToId('ai')">Get Suggestions</button>
+    </div>
+
+    <div class="gallery-item">
+      <div class="img">Informal</div>
+      <h4>Informal / Fun</h4>
+      <p class="small">Birthday, party & casual invites</p>
+      <button class="btn secondary" type="button" onclick="scrollToId('ai')">Get Suggestions</button>
+    </div>
+
+    <div class="gallery-item">
+      <div class="img">Logos</div>
+      <h4>Logo Design</h4>
+      <p class="small">Minimal & modern logo concepts</p>
+      <button class="btn secondary" type="button" onclick="openModal('orderModal')">Order Logo</button>
+    </div>
+
+    <div class="gallery-item">
+      <div class="img">Posters</div>
+      <h4>Poster Design</h4>
+      <p class="small">Event & promo posters</p>
+      <button class="btn secondary" type="button" onclick="openModal('orderModal')">Order Poster</button>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="panel" aria-labelledby="portfolioTitle">
+    <h2 id="portfolioTitle">Portfolio</h2>
+    <p class="small">Example designs. Replace images in production with your real exports.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:14px">
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample1.jpg" alt="Pastel Wedding"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Pastel Wedding</strong></div>
+        <div class="small">Formal • Pastel • Floral</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Pastel Wedding')">Preview</button></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample2.jpg" alt="Modern Logo"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Modern Logo</strong></div>
+        <div class="small">Minimal • Gradient</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Modern Logo')">Preview</button></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample3.jpg" alt="Birthday Fun"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Birthday Fun</strong></div>
+        <div class="small">Bright • Playful</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Birthday Fun')">Preview</button></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample4.jpg" alt="Classic Invite"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Classic Invite</strong></div>
+        <div class="small">Traditional • Elegant</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Classic Invite')">Preview</button></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample5.jpg" alt="Floral Card"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Floral Card</strong></div>
+        <div class="small">Romantic • Floral</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Floral Card')">Preview</button></div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="img">
+          <img src="images/sample6.jpg" alt="Photo Invite"
+               style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+        </div>
+        <div><strong>Photo Invite</strong></div>
+        <div class="small">Personalized • Photo</div>
+        <div style="margin-top:10px"><button class="btn" type="button" onclick="openPreview('Photo Invite')">Preview</button></div>
+      </div>
+
+    </div>
+  </section>
+<section id="saved" class="panel">
+  <h2>💾 My Creations</h2>
+  <p class="small">Your saved slideshow videos. Click to replay or download again.</p>
+  <div id="savedProjects" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:14px;"></div>
+  <p id="noCreations" class="small" style="text-align:center;padding:20px;display:none;">No creations yet. Make a video and save it!</p>
+</section>
+
+<section id="video" class="panel">
+  <h2>🎬 Slideshow Video Maker</h2>
+  <p class="small">Upload multiple photos — we'll turn them into a beautiful slideshow video you can download!</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div>
+      <label>Occasion</label>
+      <select id="v_occasion">
+        <option>Birthday</option>
+        <option>Anniversary</option>
+        <option>Farewell</option>
+        <option>Congratulations</option>
+        <option>Wedding</option>
+        <option>Baby Shower</option>
+      </select>
+    </div>
+    <div>
+      <label>Theme</label>
+      <select id="v_theme">
+        <option value="pink">🌸 Pink</option>
+        <option value="dark">🌙 Dark</option>
+        <option value="gold">✨ Gold</option>
+        <option value="blue">💙 Blue</option>
+      </select>
+    </div>
+    <div>
+      <label>Name</label>
+      <input type="text" id="v_name" placeholder="e.g. Priya">
+    </div>
+    <div>
+      <label>Message</label>
+      <input type="text" id="v_msg" placeholder="e.g. Wishing you joy always!">
+    </div>
+    <div>
+      <label>Seconds per photo</label>
+      <select id="v_duration">
+        <option value="2000">2 sec / photo</option>
+        <option value="3000" selected>3 sec / photo</option>
+        <option value="4000">4 sec / photo</option>
+        <option value="5000">5 sec / photo</option>
+      </select>
+    </div>
+    <div>
+      <label>Transition</label>
+      <select id="v_transition">
+        <option value="fade">Fade</option>
+        <option value="slide">Slide</option>
+        <option value="zoom">Zoom In</option>
+      </select>
+    </div>
+  </div>
+
+  <label style="margin-top:14px;display:block;">📷 Upload Photos (select multiple)</label>
+  <input type="file" id="v_images" accept="image/*" multiple onchange="showThumbs()">
+
+  <!-- Thumbnail strip -->
+  <div id="thumbStrip" style="display:none;margin-top:10px;">
+    <p class="small" id="thumbCount"></p>
+    <div id="thumbList" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;"></div>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+    <button class="btn" onclick="createVideo()">▶ Preview Slideshow</button>
+    <button class="btn" id="recordBtn" onclick="recordVideo()" style="display:none;background:#52c397;">⬇ Download Video</button>
+    <button class="btn" id="saveBtn" onclick="saveProject()" style="display:none;background:#9b6ee0;">💾 Save to My Creations</button>
+  </div>
+
+  <div id="videoStatus" style="margin-top:10px;font-size:14px;color:#e75480;font-weight:600;display:none;padding:10px;background:#fff0f6;border-radius:8px;"></div>
+
+  <div id="videoPreview" style="display:none;margin-top:20px;text-align:center;">
+    <canvas id="canvas" width="540" height="340"
+      style="border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.3);border:4px solid white;max-width:100%;">
+    </canvas>
+    <div style="margin-top:8px;">
+      <span class="small" id="slideCounter"></span>
+    </div>
+  </div>
+</section>
+
+  <!-- AI step-by-step -->
+  <section id="ai" class="panel" aria-labelledby="aiTitle">
+    <h2 id="aiTitle">AI — Step by Step Recommendation</h2>
+    <p class="small">Follow the steps. After each selection you will see suggestions. This is a rule-based "AI" (mini engine) for project purpose.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px">
+      <!-- Step 1 -->
+      <div class="step-box">
+        <label><strong>Step 1: Choose Type</strong></label>
+        <select id="stepType" onchange="liveSuggestStep(1)">
+          <option value="">--Select--</option>
+          <option value="wedding">Wedding / Invitation</option>
+          <option value="birthday">Birthday</option>
+          <option value="logo">Logo</option>
+          <option value="poster">Poster</option>
+        </select>
+        <div id="s1" class="small result" style="margin-top:10px">Suggestion will appear here.</div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-box">
+        <label><strong>Step 2: Formality</strong></label>
+        <select id="stepForm" onchange="liveSuggestStep(2)">
+          <option value="">--Select--</option>
+          <option value="formal">Formal</option>
+          <option value="informal">Informal</option>
+        </select>
+        <div id="s2" class="small result" style="margin-top:10px">Suggestion will appear here.</div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-box">
+        <label><strong>Step 3: Mood / Colour</strong></label>
+        <select id="stepMood" onchange="liveSuggestStep(3)">
+          <option value="">--Select--</option>
+          <option value="pastel">Pastel / Soft</option>
+          <option value="vibrant">Vibrant / Bold</option>
+          <option value="minimal">Minimal / Monochrome</option>
+          <option value="gold">Gold / Elegant</option>
+        </select>
+        <div id="s3" class="small result" style="margin-top:10px">Suggestion will appear here.</div>
+      </div>
+
+      <!-- Step 4: Preview & Final -->
+      <div class="step-box">
+        <label><strong>Step 4: Final Suggestion</strong></label>
+        <div id="finalSuggestion" class="result" style="min-height:110px">
+          Complete steps 1-3 to see the final design recommendation here.
+        </div>
+        <div style="margin-top:10px">
+          <button class="btn" type="button" onclick="applyRecommendation()">Use This & Order</button>
+          <button class="btn secondary" type="button" onclick="resetSteps()">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order form -->
+  <section id="order" class="panel" aria-labelledby="orderTitle">
+    <h2 id="orderTitle">Place an Order</h2>
+    <p class="small">Fill the form - this demo shows success message (no backend). Replace with server/PHP for real orders.</p>
+
+    <form id="orderForm" onsubmit="submitOrder(event)">
+      <div class="row">
+        <div style="flex:1;min-width:200px">
+          <label>Name</label><br>
+          <input type="text" id="o_name" required placeholder="Your name">
+        </div>
+        <div style="flex:1;min-width:200px">
+          <label>Phone / WhatsApp</label><br>
+          <input type="text" id="o_phone" required placeholder="Phone number">
+        </div>
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Category</label><br>
+        <select id="o_cat" required>
+          <option value="">--Select--</option>
+          <option>Wedding</option>
+          <option>Birthday</option>
+          <option>Logo</option>
+          <option>Poster</option>
+          <option>Invitation</option>
+        </select>
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Type (Formal / Informal)</label><br>
+        <select id="o_type" required>
+          <option value="">--Select--</option>
+          <option value="Formal">Formal</option>
+          <option value="Informal">Informal</option>
+        </select>
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Color / Mood</label><br>
+        <select id="o_mood" required>
+          <option value="">--Select--</option>
+          <option>Pastel</option>
+          <option>Vibrant</option>
+          <option>Minimal</option>
+          <option>Gold</option>
+        </select>
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Upload reference image (optional)</label><br>
+        <input type="file" id="o_file" accept="image/*">
+      </div>
+
+      <div style="margin-top:10px">
+        <label>Special notes</label><br>
+        <textarea id="o_note" placeholder="Any details / sample text"></textarea>
+      </div>
+
+      <div style="margin-top:12px">
+        <button class="btn" type="submit">Submit Order</button>
+      </div>
+    </form>
+
+    <div id="orderMsg" class="small" style="margin-top:12px;display:none;padding:10px;border-radius:8px;background:#f0fff5;border-left:4px solid var(--accent)"></div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="panel" aria-labelledby="contactTitle">
+    <h2 id="contactTitle">Contact</h2>
+    <p class="small">WhatsApp: +91-XXXXXXXXXX • Instagram: @AnuraginiCreations</p>
+  </section>
+
+  <div class="footer">
+    © Anuragini Creations — Built for BCA Mini Project
+  </div>
+
+  <!-- Modal for preview & order -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="box">
+      <button class="close" type="button" onclick="closeModal()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // Utility: scroll helper
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(el){
+        el.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+
+    // Modal
+    function openModal(idOrContent){
+      const modal = document.getElementById('modal');
+      const body = document.getElementById('modalBody');
+
+      if(typeof idOrContent === 'string' && idOrContent.endsWith('Modal')){
+        body.innerHTML = '<h3>Order</h3><p>Use order form below.</p>';
+      } else {
+        body.innerHTML = `
+          <div style="padding:6px">
+            <h3>Preview</h3>
+            <div style="padding:10px 0">
+              <div style="height:220px;background:linear-gradient(135deg,#fff0f6,#f8f8ff);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--pink);">
+                Design Preview
+              </div>
+              <p class="small" style="margin-top:8px">Replace with real image files for final demo.</p>
+            </div>
+          </div>`;
+      }
+      modal.classList.add('show');
+    }
+
+    function closeModal(){
+      document.getElementById('modal').classList.remove('show');
+    }
+
+    // Gallery open by category
+    function openGallery(cat){
+      const body = document.getElementById('modalBody');
+      let html = `<h3>Category: ${cat}</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:10px">`;
+
+      for(let i=1;i<=6;i++){
+        const name = `${cat} ${i}`;
+        html += `
+          <div style="background:#fff;padding:8px;border-radius:8px;box-shadow:var(--shadow);text-align:center">
+            <div style="height:120px;border-radius:6px;background:linear-gradient(135deg,#fff0f6,#fff);display:flex;align-items:center;justify-content:center;color:var(--pink);font-weight:700">
+              ${name}
+            </div>
+            <div style="margin-top:8px">
+              <button class="btn" type="button" onclick="selectDesign('${name.replace(/'/g, "\\'")}')">Request this</button>
+            </div>
+          </div>`;
+      }
+      html += `</div>`;
+      body.innerHTML = html;
+      document.getElementById('modal').classList.add('show');
+    }
+
+    function openUpload(){
+      const body = document.getElementById('modalBody');
+      body.innerHTML = `
+        <h3>Upload your design</h3>
+        <p class="small">You can upload a sample image in the order form.</p>
+        <div style="margin-top:10px">
+          <button class="btn" type="button" onclick="scrollToId('order')">Go to Order</button>
+        </div>`;
+      document.getElementById('modal').classList.add('show');
+    }
+
+    function openPreview(name){
+      const body = document.getElementById('modalBody');
+      const safeName = name.replace(/'/g, "\\'");
+      body.innerHTML = `
+        <h3>${name}</h3>
+        <div style="height:220px;border-radius:8px;background:linear-gradient(135deg,#fff0f6,#fff);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--pink)">
+          Preview: ${name}
+        </div>
+        <p class="small" style="margin-top:8px">Click "Request this" to pre-fill order.</p>
+        <div style="margin-top:10px">
+          <button class="btn" type="button" onclick="selectDesign('${safeName}')">Request this</button>
+        </div>`;
+      document.getElementById('modal').classList.add('show');
+    }
+
+    function selectDesign(name){
+      closeModal();
+      scrollToId('order');
+      document.getElementById('o_note').value = "I want this design: " + name;
+    }
+
+    // AI step-by-step logic (rule-based suggestions)
+    function liveSuggestStep(step){
+      const t = document.getElementById('stepType').value;
+      const f = document.getElementById('stepForm').value;
+      const m = document.getElementById('stepMood').value;
+
+      // Step wise suggestion
+      if(step === 1){
+        let txt = "Choose mood and formality next. Example: Wedding → pastels, elegant.";
+        if(t === 'wedding') txt = "Suggestion: Pastel or gold tones suit weddings.";
+        if(t === 'birthday') txt = "Suggestion: Bright and playful colors for birthdays.";
+        if(t === 'logo') txt = "Suggestion: Minimal or gradient themes for logos.";
+        if(t === 'poster') txt = "Suggestion: Bold fonts and high contrast for posters.";
+        document.getElementById('s1').innerText = txt;
+      }
+
+      if(step === 2){
+        let txt = "Formal = classic fonts & clean layout. Informal = playful fonts & decorations.";
+        if(f === 'formal') txt = "Formal: Use serif fonts, minimal decorations, elegant borders.";
+        if(f === 'informal') txt = "Informal: Use script or handwritten fonts, fun icons, colorful shapes.";
+        document.getElementById('s2').innerText = txt;
+      }
+
+      if(step === 3){
+        let txt = "Pick a mood: pastel, vibrant, minimal or gold for elegance.";
+        if(m === 'pastel') txt = "Pastel: Soft pinks, lavenders, beige — perfect for romantic invites.";
+        if(m === 'vibrant') txt = "Vibrant: Bright contrasting colors for attention-grabbing posters.";
+        if(m === 'minimal') txt = "Minimal: Monochrome or simple palettes for professional looks.";
+        if(m === 'gold') txt = "Gold: Use gold accents with white/black for luxury feel.";
+        document.getElementById('s3').innerText = txt;
+      }
+
+      updateFinalSuggestion();
+    }
+
+    function updateFinalSuggestion(){
+      const t = document.getElementById('stepType').value;
+      const f = document.getElementById('stepForm').value;
+      const m = document.getElementById('stepMood').value;
+      const out = document.getElementById('finalSuggestion');
+
+      if(!t || !f || !m){
+        out.innerHTML = "Complete steps 1–3 to generate a full recommendation.";
+        return;
+      }
+
+      let rec = `<h3>Recommendation:</h3><ul>`;
+
+      // Theme based on type + mood
+      if(t === 'wedding'){
+        const theme = (m === 'pastel') ? 'Pastel Floral'
+                    : (m === 'gold') ? 'Gold & White'
+                    : (m === 'minimal') ? 'Minimal Wedding'
+                    : 'Vibrant Floral';
+        rec += `<li>Theme: ${theme}</li>`;
+      }
+      if(t === 'birthday'){
+        const theme = (m === 'vibrant') ? 'Bright Party'
+                    : (m === 'pastel') ? 'Soft Birthday'
+                    : (m === 'minimal') ? 'Clean Birthday'
+                    : 'Colorful Fun';
+        rec += `<li>Theme: ${theme}</li>`;
+      }
+      if(t === 'logo'){
+        const theme = (m === 'minimal') ? 'Minimal Monochrome'
+                    : (m === 'gold') ? 'Elegant Gradient'
+                    : 'Vibrant Gradient';
+        rec += `<li>Theme: ${theme}</li>`;
+      }
+      if(t === 'poster'){
+        const theme = (m === 'vibrant') ? 'High Contrast Poster' : 'Modern Poster';
+        rec += `<li>Theme: ${theme}</li>`;
+      }
+
+      rec += `<li>Formality: ${f}</li>`;
+
+      // Fonts suggestion
+      if(f === 'formal'){
+        rec += `<li>Fonts: Serif / Classic (e.g., Garamond)</li>`;
+      } else {
+        rec += `<li>Fonts: Script / Handwritten (e.g., Pacifico)</li>`;
+      }
+
+      // Color palette
+      if(m === 'pastel'){
+        rec += `<li>Colors: #F8E8EE, #F5E6F7, #FFDDE6</li>`;
+      } else if(m === 'vibrant'){
+        rec += `<li>Colors: #FF5A5F, #FFD166, #06D6A0</li>`;
+      } else if(m === 'minimal'){
+        rec += `<li>Colors: #FFFFFF, #111827, #9CA3AF</li>`;
+      } else if(m === 'gold'){
+        rec += `<li>Colors: #D4AF37, #FFF7E6, #222222</li>`;
+      }
+
+      rec += `</ul>
+        <p><strong>Sample text idea:</strong> "You're invited — join us for a beautiful celebration!"</p>`;
+      out.innerHTML = rec;
+    }
+
+    function applyRecommendation(){
+      const final = document.getElementById('finalSuggestion').innerText;
+      if(final.includes('Complete steps')){
+        alert('Please complete steps 1-3 first.');
+        return;
+      }
+      document.getElementById('o_note').value = final;
+      scrollToId('order');
+      const msg = document.getElementById('orderMsg');
+      msg.style.display = 'block';
+      msg.innerText = 'Recommendation applied to order form. You can edit notes and submit.';
+      setTimeout(() => { msg.style.display = 'none'; }, 4000);
+    }
+
+    function resetSteps(){
+      document.getElementById('stepType').value = '';
+      document.getElementById('stepForm').value = '';
+      document.getElementById('stepMood').value = '';
+      document.getElementById('s1').innerText = 'Suggestion will appear here.';
+      document.getElementById('s2').innerText = 'Suggestion will appear here.';
+      document.getElementById('s3').innerText = 'Suggestion will appear here.';
+      document.getElementById('finalSuggestion').innerText =
+        'Complete steps 1-3 to see the final design recommendation here.';
+    }
+
+    // Order submission (demo)
+    function submitOrder(e){
+      e.preventDefault();
+      const name = document.getElementById('o_name').value.trim();
+      const phone = document.getElementById('o_phone').value.trim();
+      if(!name || !phone){
+        alert('Please add name and phone');
+        return;
+      }
+      const msg = document.getElementById('orderMsg');
+      msg.style.display = 'block';
+      msg.innerHTML = `<strong>Order submitted!</strong> Thank you ${name}. We will contact you on ${phone}. (Demo only)`;
+      document.getElementById('orderForm').reset();
+      setTimeout(() => { msg.style.display = 'none'; }, 8000);
+    }
+
+    // close modal clicking outside
+    document.getElementById('modal').addEventListener('click', function(e){
+      if(e.target === this) closeModal();
+    });
+
+    // open AI if hash present
+    if(location.hash === '#ai'){
+      setTimeout(() => scrollToId('ai'), 300);
+    }
+let isLogin = true;
+
+function toggleForm(){
+  isLogin = !isLogin;
+
+  document.getElementById("title").innerText = isLogin ? "Login" : "Signup";
+  document.querySelector("#authPage button").innerText = isLogin ? "Login" : "Signup";
+  document.querySelector("#authPage p").innerText = isLogin ? "Create new account" : "Already have account?";
+  document.getElementById("msg").innerText="";
+}
+
+function handleAuth(){
+  let user = document.getElementById("username").value;
+  let pass = document.getElementById("password").value;
+
+  if(!user || !pass){
+    document.getElementById("msg").innerText="Fill all fields";
+    return;
+  }
+
+  if(isLogin){
+    let savedUser = localStorage.getItem("user");
+    let savedPass = localStorage.getItem("pass");
+
+    if(user === savedUser && pass === savedPass){
+      document.getElementById("authPage").style.display="none";
+document.getElementById("mainSite").style.display="block";
+document.getElementById("dashboard").style.display="block";
+      document.getElementById("msg").innerText="Invalid login";
+    }
+  } else {
+    localStorage.setItem("user", user);
+    localStorage.setItem("pass", pass);
+    document.getElementById("msg").innerText="Signup successful! Now login.";
+    document.getElementById("msg").innerText="Invalid login";
+    toggleForm();
+  }
+}
+
+function logout(){
+  document.getElementById("mainSite").style.display="none";
+  document.getElementById("authPage").style.display="flex";
+}
+// ═══════════════ SLIDESHOW VIDEO ENGINE ═══════════════
+let loadedImgs   = [];
+let animFrame    = null;
+let currentSlide = 0;
+let slideStartTime = 0;
+
+function getTheme(t) {
+  const m = {
+    pink: { grad2:'rgba(180,20,80,0.85)', text:'#fff', accent:'#ffe4ec', badge:'rgba(231,84,128,0.9)' },
+    dark: { grad2:'rgba(0,0,0,0.88)',     text:'#fff', accent:'#f0c040', badge:'rgba(30,30,60,0.9)' },
+    gold: { grad2:'rgba(100,60,0,0.85)',  text:'#fff8e1', accent:'#ffd700', badge:'rgba(160,110,0,0.9)' },
+    blue: { grad2:'rgba(10,30,120,0.88)', text:'#e8f0ff', accent:'#90caf9', badge:'rgba(30,80,200,0.9)' }
+  };
+  return m[t] || m.pink;
+}
+function getOccEmojis(occ) {
+  const map = { 'Birthday':['🎂','🎈','🎊','🎁'], 'Anniversary':['❤️','💐','🥂','✨'],
+    'Farewell':['👋','🌟','💫','🙏'], 'Congratulations':['🎉','⭐','🏆','🎊'],
+    'Wedding':['💍','🌸','👑','✨'], 'Baby Shower':['🍼','💛','🌈','🧸'] };
+  return map[occ] || ['✨','🌟'];
+}
+function wrapText(ctx, text, x, y, maxW, lineH) {
+  const words = text.split(' '); let line = '', lines = [];
+  for (const w of words) { const t = line + w + ' '; if (ctx.measureText(t).width > maxW && line) { lines.push(line.trim()); line = w + ' '; } else line = t; }
+  if (line) lines.push(line.trim());
+  lines.reverse().forEach((l, i) => ctx.fillText(l, x, y - i * lineH));
+}
+function drawSlideFrame(canvas, img, name, msg, occ, theme, progress, transition, slideIdx, total) {
+  const ctx = canvas.getContext("2d"); const W = canvas.width, H = canvas.height;
+  const T = getTheme(theme);
+  ctx.clearRect(0,0,W,H);
+  ctx.save();
+  if (transition === 'slide') { ctx.translate((1 - Math.min(progress*4,1)) * W, 0); }
+  else if (transition === 'zoom') { const s = 1 + 0.06*progress; ctx.translate(W/2,H/2); ctx.scale(s,s); ctx.translate(-W/2,-H/2); }
+  ctx.drawImage(img,0,0,W,H); ctx.restore();
+  if (transition==='fade' && progress<0.15) { ctx.fillStyle=`rgba(0,0,0,${(0.15-progress)*6})`; ctx.fillRect(0,0,W,H); }
+  const grad = ctx.createLinearGradient(0,H*0.45,0,H); grad.addColorStop(0,'rgba(0,0,0,0)'); grad.addColorStop(1,T.grad2);
+  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+  const vig = ctx.createRadialGradient(W/2,H/2,H*0.25,W/2,H/2,H*0.82);
+  vig.addColorStop(0,'rgba(0,0,0,0)'); vig.addColorStop(1,'rgba(0,0,0,0.22)');
+  ctx.fillStyle=vig; ctx.fillRect(0,0,W,H);
+  const tp = Math.min(progress*3,1); const su = 24*(1-tp);
+  ctx.globalAlpha=tp; ctx.save(); ctx.translate(0,su);
+  // Badge
+  ctx.fillStyle=T.badge; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(16,16,164,34,17); else { ctx.rect(16,16,164,34); } ctx.fill();
+  ctx.fillStyle=T.accent; ctx.font="bold 13px Poppins,Arial"; ctx.fillText("✨ "+occ,28,38);
+  // Emoji
+  ctx.font="28px Arial"; ctx.fillText(getOccEmojis(occ)[slideIdx%4]||'✨',W-50,46);
+  // Slide counter
+  ctx.fillStyle='rgba(255,255,255,0.6)'; ctx.font="12px Poppins,Arial"; ctx.textAlign='right';
+  ctx.fillText(`${slideIdx+1} / ${total}`,W-16,H-14); ctx.textAlign='left';
+  // Name
+  ctx.fillStyle=T.text; ctx.shadowColor="rgba(0,0,0,0.7)"; ctx.shadowBlur=10;
+  ctx.font="bold 30px Poppins,Arial"; ctx.fillText(name,20,H-46);
+  ctx.font="16px Poppins,Arial"; ctx.shadowBlur=6; wrapText(ctx,msg,20,H-18,W-40,20);
+  ctx.shadowBlur=0; ctx.restore(); ctx.globalAlpha=1;
+}
+
+function showThumbs() {
+  const files=document.getElementById("v_images").files;
+  const strip=document.getElementById("thumbStrip"), list=document.getElementById("thumbList");
+  if(!files.length){strip.style.display='none';return;}
+  strip.style.display='block';
+  document.getElementById("thumbCount").innerText=`${files.length} photo${files.length>1?'s':''} selected`;
+  list.innerHTML='';
+  Array.from(files).forEach((f,i)=>{
+    const url=URL.createObjectURL(f), div=document.createElement('div');
+    div.style.cssText='position:relative;display:inline-block;';
+    div.innerHTML=`<img src="${url}" style="width:64px;height:64px;object-fit:cover;border-radius:8px;border:2px solid #e75480;"><span style="position:absolute;bottom:2px;right:4px;font-size:10px;background:rgba(0,0,0,0.6);color:#fff;padding:1px 4px;border-radius:4px;">${i+1}</span>`;
+    list.appendChild(div);
+  });
+}
+
+function createVideo() {
+  const files=document.getElementById("v_images").files;
+  const name=document.getElementById("v_name").value.trim();
+  const msg=document.getElementById("v_msg").value.trim();
+  const occ=document.getElementById("v_occasion").value;
+  const theme=document.getElementById("v_theme").value;
+  if(!name||!msg||files.length===0){alert("Please fill Name, Message and upload at least one photo.");return;}
+  loadedImgs=[]; let loaded=0;
+  Array.from(files).forEach((f,i)=>{
+    const im=new Image(); im.src=URL.createObjectURL(f);
+    im.onload=()=>{ loadedImgs[i]=im; loaded++; if(loaded===files.length) startPreviewLoop(name,msg,occ,theme); };
+  });
+}
+
+function startPreviewLoop(name,msg,occ,theme) {
+  const canvas=document.getElementById("canvas");
+  const transition=document.getElementById("v_transition").value;
+  const perSlide=parseInt(document.getElementById("v_duration").value)||3000;
+  const total=loadedImgs.length;
+  document.getElementById("videoPreview").style.display="block";
+  document.getElementById("recordBtn").style.display="inline-block";
+  document.getElementById("saveBtn").style.display="inline-block";
+  cancelAnimationFrame(animFrame); currentSlide=0; slideStartTime=performance.now();
+  function loop(now) {
+    const elapsed=now-slideStartTime, progress=Math.min(elapsed/perSlide,1);
+    document.getElementById("slideCounter").innerText=`Slide ${currentSlide+1} of ${total}  •  ${Math.ceil((perSlide-elapsed)/1000)}s`;
+    drawSlideFrame(canvas,loadedImgs[currentSlide],name,msg,occ,theme,progress,transition,currentSlide,total);
+    if(elapsed>=perSlide){currentSlide=(currentSlide+1)%total; slideStartTime=now;}
+    animFrame=requestAnimationFrame(loop);
+  }
+  animFrame=requestAnimationFrame(loop);
+}
+
+function recordVideo() {
+  if(!loadedImgs.length){alert("Click Preview first!");return;}
+  const canvas=document.getElementById("canvas");
+  const name=document.getElementById("v_name").value.trim()||"slideshow";
+  const msg=document.getElementById("v_msg").value.trim();
+  const occ=document.getElementById("v_occasion").value;
+  const theme=document.getElementById("v_theme").value;
+  const transition=document.getElementById("v_transition").value;
+  const perSlide=parseInt(document.getElementById("v_duration").value)||3000;
+  const total=loadedImgs.length, totalDur=perSlide*total;
+  const statusEl=document.getElementById("videoStatus");
+  statusEl.style.display="block";
+  statusEl.innerHTML=`⏳ Recording ${total} slide${total>1?'s':''} (${(totalDur/1000).toFixed(0)}s)… please wait.`;
+  document.getElementById("recordBtn").disabled=true; document.getElementById("saveBtn").disabled=true;
+  const mimeType=['video/webm;codecs=vp9','video/webm','video/mp4'].find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}})||'video/webm';
+  cancelAnimationFrame(animFrame);
+  const stream=canvas.captureStream(30);
+  const recorder=new MediaRecorder(stream,{mimeType,videoBitsPerSecond:4000000});
+  const chunks=[];
+  recorder.ondataavailable=e=>{if(e.data.size>0)chunks.push(e.data);};
+  recorder.onstop=()=>{
+    const blob=new Blob(chunks,{type:mimeType}), url=URL.createObjectURL(blob);
+    const ext=mimeType.includes('mp4')?'mp4':'webm';
+    const a=document.createElement("a"); a.href=url; a.download=name.replace(/\s+/g,"_")+"_slideshow."+ext; a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),3000);
+    statusEl.innerHTML=`✅ Video downloaded! Check your Downloads folder.`;
+    document.getElementById("recordBtn").disabled=false; document.getElementById("saveBtn").disabled=false;
+    startPreviewLoop(name,msg,occ,theme);
+    setTimeout(()=>{statusEl.style.display="none";},6000);
+  };
+  let recSlide=0, recStart=performance.now(); recorder.start(100);
+  function recLoop(now) {
+    const elapsed=now-recStart, progress=Math.min(elapsed/perSlide,1);
+    drawSlideFrame(canvas,loadedImgs[recSlide],name,msg,occ,theme,progress,transition,recSlide,total);
+    const pct=Math.round(((recSlide*perSlide+elapsed)/totalDur)*100);
+    statusEl.innerHTML=`⏳ Recording… slide ${recSlide+1}/${total} &nbsp;|&nbsp; ${pct}%`;
+    if(elapsed>=perSlide){ recSlide++; recStart=now;
+      if(recSlide>=total){drawSlideFrame(canvas,loadedImgs[total-1],name,msg,occ,theme,1,transition,total-1,total); setTimeout(()=>recorder.stop(),200); return;}
+    }
+    animFrame=requestAnimationFrame(recLoop);
+  }
+  animFrame=requestAnimationFrame(recLoop);
+}
+
+function saveProject() {
+  const name=document.getElementById("v_name").value.trim();
+  const msg=document.getElementById("v_msg").value.trim();
+  const occ=document.getElementById("v_occasion").value;
+  const theme=document.getElementById("v_theme").value;
+  if(!name||!msg||!loadedImgs.length){alert("Preview first, then save!");return;}
+  const canvas=document.getElementById("canvas");
+  const thumbData=canvas.toDataURL("image/jpeg",0.5);
+  const project={id:Date.now(),type:"slideshow",name,msg,occ,theme,
+    slides:loadedImgs.length, duration:parseInt(document.getElementById("v_duration").value)||3000,
+    transition:document.getElementById("v_transition").value, thumb:thumbData,
+    date:new Date().toLocaleDateString("en-IN",{day:'2-digit',month:'short',year:'numeric'})};
+  let projects=JSON.parse(localStorage.getItem("projects")||"[]");
+  projects=projects.filter(p=>!(p.name===name&&p.occ===occ&&p.type==='slideshow'));
+  projects.unshift(project);
+  localStorage.setItem("projects",JSON.stringify(projects));
+  const statusEl=document.getElementById("videoStatus");
+  statusEl.style.display="block"; statusEl.innerHTML=`💜 Saved to My Creations!`;
+  setTimeout(()=>{statusEl.style.display="none";},3000);
+  loadProjects();
+}
+
+function loadProjects() {
+  const projects=JSON.parse(localStorage.getItem("projects")||"[]");
+  const grid=document.getElementById("savedProjects"), none=document.getElementById("noCreations");
+  if(!grid) return;
+  if(!projects.length){grid.innerHTML=''; if(none) none.style.display='block'; return;}
+  if(none) none.style.display='none';
+  const cols={'pink':'#e75480','dark':'#333','gold':'#c8960a','blue':'#1a4fc8'};
+  grid.innerHTML=projects.map(p=>{
+    const thumbHTML=p.thumb?`<img src="${p.thumb}" style="width:100%;height:140px;object-fit:cover;border-radius:10px 10px 0 0;">`
+      :`<div style="width:100%;height:140px;border-radius:10px 10px 0 0;background:linear-gradient(135deg,#fbeaf0,#e8f4ff);display:flex;align-items:center;justify-content:center;font-size:36px;">🎬</div>`;
+    const col=cols[p.theme]||'#e75480';
+    return `<div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.09);border:1px solid #f0e7f0;">
+      ${thumbHTML}
+      <div style="padding:12px;">
+        <div style="font-weight:700;font-size:15px;">${p.name}</div>
+        <div style="font-size:12px;color:#888;margin:2px 0;">${p.msg}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <span style="background:${col}22;color:${col};font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600;">✨ ${p.occ}</span>
+          <span style="background:#f0f0f0;color:#666;font-size:11px;padding:2px 8px;border-radius:20px;">📷 ${p.slides||1} slide${(p.slides||1)>1?'s':''}</span>
+        </div>
+        <div style="font-size:11px;color:#aaa;margin-top:4px;">${p.date||''}</div>
+        <div style="display:flex;gap:6px;margin-top:10px;">
+          <button onclick="replayCreation(${p.id})" style="flex:1;padding:7px;border-radius:7px;background:#e75480;color:#fff;border:none;cursor:pointer;font-weight:600;font-size:12px;">▶ Reload</button>
+          <button onclick="deleteCreation(${p.id})" style="padding:7px 10px;border-radius:7px;background:#fff;color:#e75480;border:1px solid #e75480;cursor:pointer;font-size:12px;">🗑</button>
+        </div>
+      </div></div>`;
+  }).join('');
+}
+
+function deleteCreation(id) {
+  if(!confirm("Delete this creation?"))return;
+  let p=JSON.parse(localStorage.getItem("projects")||"[]");
+  localStorage.setItem("projects",JSON.stringify(p.filter(x=>x.id!==id)));
+  loadProjects();
+}
+
+function replayCreation(id) {
+  const p=JSON.parse(localStorage.getItem("projects")||"[]").find(x=>x.id===id);
+  if(!p)return;
+  document.getElementById("siteContent").style.display="block";
+  document.getElementById("dashboard").style.display="none";
+  scrollToId("video");
+  document.getElementById("v_name").value=p.name;
+  document.getElementById("v_msg").value=p.msg;
+  document.getElementById("v_occasion").value=p.occ;
+  document.getElementById("v_theme").value=p.theme;
+  document.getElementById("v_duration").value=p.duration||3000;
+  document.getElementById("v_transition").value=p.transition||'fade';
+  alert(`Details loaded for "${p.name}"! Upload the photos again and click Preview.`);
+}
+
+function downloadImage() { recordVideo(); }
+
+window.onload = loadProjects;
+function openSection(section) {
+  document.getElementById("dashboard").style.display = "none";
+  document.getElementById("siteContent").style.display = "block";
+
+  if(section === "home"){
+    scrollToId("home");
+  }
+  if(section === "video"){
+    scrollToId("video");
+  }
+  if(section === "saved"){
+    scrollToId("saved");
+  }
+}
+
+function goDashboard(){
+  document.getElementById("dashboard").style.display = "block";
+  document.getElementById("siteContent").style.display = "none";
+}
+  </script>
+
+</body>
+</html>

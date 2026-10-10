@@ -1,0 +1,102 @@
+# 🎨 Anuragini Creations — Invitation Maker
+
+**Anuragini Creations** is a web-based design studio project developed as a BCA mini project. It allows users to explore invitation designs, receive design recommendations, place sample orders, and create personalized slideshow videos.
+
+## 📌 About the Project
+
+The main objective of this project is to provide a simple and interactive platform for creating invitation ideas and personalized slideshow videos for different occasions. The website combines creative design options with a rule-based recommendation system to help users choose suitable themes, colours, and styles.
+
+## ✨ Features
+
+- **Login and Signup Interface:** Provides a basic login and registration interface using browser local storage.
+- **Invitation Maker:** Explore design categories for birthdays, weddings, baby showers, and Christmas.
+- **Design Services:** Displays formal invitations, informal invitations, logo designs, and posters.
+- **Portfolio Gallery:** Showcases sample design concepts.
+- **Rule-Based AI Recommendation System:** Suggests themes, fonts, and colour palettes based on the selected design type, formality, and mood.
+- **Slideshow Video Maker:** Upload multiple photos and create personalized slideshow previews.
+- **Customizable Videos:** Choose an occasion, theme, name, message, photo duration, and transition effect.
+- **Download Video:** Export slideshow recordings in a browser-supported video format.
+- **My Creations:** Save slideshow project details in local storage, reload them, and delete saved entries.
+- **Order Form:** Enter customer details, select a design category, and provide special requirements.
+- **Responsive Layout:** Uses flexible layouts to accommodate different screen sizes.
+
+## 🛠️ Technologies Used
+
+- **HTML5** — Structure of the website.
+- **CSS3** — Styling, layouts, colours, and responsive design.
+- **JavaScript** — Interactive features, form handling, design recommendations, and slideshow functionality.
+- **HTML5 Canvas API** — Drawing slideshow frames.
+- **MediaRecorder API** — Recording slideshow previews as video.
+- **Browser Local Storage** — Storing basic account details and saved project information.
+- **Google Fonts (Poppins)** — Typography.
+
+## 📂 Project Structure
+
+```text
+Anuragini-Creations/
+│
+├── index.html
+├── README.md
+└── images/
+    ├── sample1.jpg
+    ├── sample2.jpg
+    ├── sample3.jpg
+    ├── sample4.jpg
+    ├── sample5.jpg
+    └── sample6.jpg
+```
+
+*Note: The image folder and sample images should be added to the project if they are not already present. Rename `mn.html` to `index.html` if you want to use the structure shown above.*
+
+## 🚀 How to Run the Project
+
+1. Download or clone this repository.
+2. Open the project folder in Visual Studio Code.
+3. Ensure the required sample images are available in the `images` folder.
+4. Open `index.html` in a web browser, or use the Live Server extension in VS Code.
+5. Explore the invitation maker, design recommendation system, order form, and slideshow video maker.
+
+No package installation or backend setup is required for the current frontend demonstration.
+
+## 🧠 How the Recommendation System Works
+
+The project includes a **rule-based design recommendation system** that generates suggestions using predefined JavaScript conditions.
+
+Users select:
+
+1. **Design Type:** Wedding, birthday, logo, or poster.
+2. **Formality:** Formal or informal.
+3. **Mood/Colour:** Pastel, vibrant, minimal, or gold.
+
+Based on these selections, the system suggests appropriate design themes, fonts, and colour palettes. This is a rule-based demonstration, not a machine-learning model.
+
+## ⚠️ Current Limitations
+
+- Login and signup details are stored in browser local storage; this is not secure authentication.
+- Order submission displays a demonstration message and does not send orders to a server.
+- Saved creations store project details and a thumbnail, not the original uploaded photos or a complete editable video project.
+- Portfolio sample images must be supplied separately.
+- Actual customer order processing would require a backend and database.
+
+## 🔮 Future Improvements
+
+- Integrate a secure authentication system.
+- Connect order forms to a backend and database.
+- Add more invitation templates and customization options.
+- Develop an advanced recommendation system.
+- Add cloud storage for user creations.
+- Deploy the website for public access.
+
+## 🎓 Academic Project
+
+**Project Name:** Anuragini Creations — Invitation Maker  
+**Project Type:** BCA Mini Project  
+**Domain:** Web Development and Rule-Based Design Recommendation
+
+## 👩‍💻 Author
+
+Developed as a Bachelor of Computer Applications (BCA) mini project.
+
+---
+
+*Anuragini Creations — Bringing your celebrations to life through creative designs.*
